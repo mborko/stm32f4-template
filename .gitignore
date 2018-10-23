@@ -1,0 +1,8 @@
+*.o
+*.d
+*.a
+*.bin
+build/
+lib/
+src/indinf*
+
