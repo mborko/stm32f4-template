@@ -47,8 +47,8 @@ INCLUDES += -I../
 
 # LIBRARIES
 HAL_LIBDIR	= $(STM32_PATH)/Drivers/STM32F4xx_HAL_Driver/Src
-LIB_SOURCES	+= $(shell find $(HAL_LIBDIR) -name '*.c')
-LIB_ASM_SRC	+= $(shell find $(HAL_LIBDIR) -name '*.S')
+LIB_SOURCES	+= $(shell find $(HAL_LIBDIR) -maxdepth 1 -name '*.c')
+LIB_ASM_SRC	+= $(shell find $(HAL_LIBDIR) -maxdepth 1 -name '*.S')
 LIB_OUTDIR	= lib/hal_build
 STM32_LIB	= lib/libstm32_f4.a
 
