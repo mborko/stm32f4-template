@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Templates/Src/stm32f4xx_it.c 
+  * @file    GPIO/GPIO_EXTI/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
@@ -43,7 +43,7 @@
   * @{
   */
 
-/** @addtogroup Templates
+/** @addtogroup GPIO_EXTI
   * @{
   */
 
@@ -51,7 +51,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -165,6 +164,16 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief  This function handles External line 0 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void EXTI0_IRQHandler(void)
+{
+  HAL_GPIO_EXTI_IRQHandler(KEY_BUTTON_PIN);
+}
+
+/**
   * @brief  This function handles PPP interrupt request.
   * @param  None
   * @retval None
@@ -172,7 +181,6 @@ void SysTick_Handler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
-
 
 /**
   * @}

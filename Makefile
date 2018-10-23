@@ -24,17 +24,16 @@ CMSIS_PATH = $(STM32_PATH)/Drivers/CMSIS
 PROJ := src/template
 
 # SOURCES: list of input source sources
-SOURCEDIR = $(PROJ)
-SOURCES = $(wildcard $(SOURCEDIR)/*.c)
+SOURCEDIR = $(PROJ)/Src
+SOURCES	+= $(shell find $(SOURCEDIR) -name '*.c')
 
-SOURCES += default/stm32f4xx_it.c
-SOURCES += default/system_stm32f4xx.c
-#SOURCES += default/stm32f4xx_hal_msp.c
+SOURCES += default/stm32f4_discovery.c
 
 ASM_SOURCES += $(CMSIS_PATH)/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f407xx.s
 
 # INCLUDES: list of includes, by default, use Includes directory
 INCLUDES = -Iinclude
+INCLUDES += -I$(PROJ)/Inc
 INCLUDES += -I$(STM32_PATH)/Drivers/STM32F4xx_HAL_Driver/Inc
 INCLUDES += -I$(STM32_PATH)/Projects/STM32F4-Discovery/Demonstrations/Inc
 INCLUDES += -I$(STM32_PATH)/Projects/STM32F4-Discovery/Templates/Inc
@@ -42,6 +41,7 @@ INCLUDES += -I$(CMSIS_PATH)/Device/ST/STM32F4xx/Include
 INCLUDES += -I$(CMSIS_PATH)/Include
 ##INCLUDES += -include$(STM32_PATH)/Project/Demonstration/stm32f30x_conf.h
 INCLUDES += -include$(STM32_PATH)/Projects/STM32F4-Discovery/Templates/Inc/stm32f4xx_hal_conf.h
+INCLUDES += -include$(STM32_PATH)/Drivers/BSP/STM32F4-Discovery/stm32f4_discovery.h
 INCLUDES += -include$(CMSIS_PATH)/Device/ST/STM32F4xx/Include/stm32f407xx.h
 INCLUDES += -I../
 

@@ -1,8 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Templates/Src/main.c 
+  * @file    GPIO/GPIO_EXTI/Src/main.c 
   * @author  MCD Application Team
-  * @brief   Main program body
+  * @brief   This example describes how to configure and use GPIOs through 
+  *          the STM32F4xx HAL API.
   ******************************************************************************
   * @attention
   *
@@ -40,9 +41,9 @@
   * @{
   */
 
-/** @addtogroup Templates
+/** @addtogroup GPIO_EXTI
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,8 +52,10 @@
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
+static void EXTILine0_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
+
 /**
   * @brief  Main program
   * @param  None
@@ -60,26 +63,31 @@ static void Error_Handler(void);
   */
 int main(void)
 {
+ /* This sample code shows how to use STM32F4xx GPIO HAL API to toggle PD12, PD13,
+    PD14, and PD14 IOs (connected to LED4, LED3, LED5 and LED6 on STM32F401C-DISCO board (MB1115B)) 
+    in an infinite loop.
+    To proceed, 3 steps are required: */
 
   /* STM32F4xx HAL library initialization:
-       - Configure the Flash prefetch, Flash preread and Buffer caches
-       - Systick timer is configured by default as source of time base, but user 
-             can eventually implement his proper time base source (a general purpose 
-             timer for example or other time source), keeping in mind that Time base 
-             duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
-             handled in milliseconds basis.
-       - Low Level Initialization
+       - Configure the Flash prefetch, instruction and Data caches
+       - Configure the Systick to generate an interrupt each 1 msec
+       - Set NVIC Group Priority to 4
+       - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
+ 
+  /* Configure LED3, LED4, LED5 and LED6 */
+  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED5);
+  BSP_LED_Init(LED6);
 
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
-
-  /* Add your application code here
-     */
-
-
+  
+  /* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
+  EXTILine0_Config();
+  
   /* Infinite loop */
   while (1)
   {
@@ -110,7 +118,7 @@ static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-  
+
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
   
@@ -118,7 +126,7 @@ static void SystemClock_Config(void)
      clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -130,10 +138,9 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    /* Initialization Error */
     Error_Handler();
   }
-  
+
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
@@ -143,7 +150,6 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
-    /* Initialization Error */
     Error_Handler();
   }
 
@@ -154,6 +160,50 @@ static void SystemClock_Config(void)
     __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
   }
 }
+
+/**
+  * @brief  Configures EXTI Line0 (connected to PA0 pin) in interrupt mode
+  * @param  None
+  * @retval None
+  */
+static void EXTILine0_Config(void)
+{
+  GPIO_InitTypeDef   GPIO_InitStructure;
+
+  /* Enable GPIOA clock */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  
+  /* Configure PA0 pin as input floating */
+  GPIO_InitStructure.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStructure.Pull = GPIO_NOPULL;
+  GPIO_InitStructure.Pin = GPIO_PIN_0;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  /* Enable and set EXTI Line0 Interrupt to the lowest priority */
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+}
+
+/**
+  * @brief EXTI line detection callbacks
+  * @param GPIO_Pin: Specifies the pins connected EXTI line
+  * @retval None
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(GPIO_Pin == KEY_BUTTON_PIN)
+  {
+    /* Toggle LED3 */
+    BSP_LED_Toggle(LED3);
+    /* Toggle LED4 */
+    BSP_LED_Toggle(LED4);    
+    /* Toggle LED5 */
+    BSP_LED_Toggle(LED5);   
+    /* Toggle LED6 */
+    BSP_LED_Toggle(LED6);
+  }
+}
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @param  None
@@ -161,7 +211,8 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-  /* User may add here some code to deal with this error */
+  /* Turn LED5 on */
+  BSP_LED_On(LED5);
   while(1)
   {
   }
@@ -190,10 +241,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
