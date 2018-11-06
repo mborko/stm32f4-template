@@ -17,7 +17,7 @@ The newest Flash-Tool for the STM-Boards can be found at [STLINK](https://github
         cd stlink  
         make clean  
         make package  
-        sudo dpkg -i build/Release/stlink-1.4.0-12-g95b6e03-amd64.deb  
+        sudo dpkg -i build/Release/stlink-*-amd64.deb  
         sudo ldconfig # refresh library list for st-link  
 
 ## Additional Resources
