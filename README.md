@@ -4,7 +4,7 @@ This is a template repository for getting the main peripherals working on a [STM
 
 ## Toolchain
 
-To get all dependencies and be ready to flash the STM32F3 Board, install the following packages:
+To get all dependencies and be ready to flash the STM32F4 Board, install the following packages:
 
         apt install cmake libusb-dev libusb-1.0.0-dev build-essential autoconf\
          cutecom git binutils-arm-none-eabi gcc-arm-none-eabi
