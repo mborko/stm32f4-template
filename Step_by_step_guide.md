@@ -27,7 +27,7 @@ Your terminal should look like this:
 To install all needed dependencies, simply run the following command:
 
 ```sh
-apt install cmake libusb-dev libusb-1.0.0-dev build-essential autoconf\
+apt install cmake libusb-dev libusb-1.0.0-dev build-essential autoconf \
      cutecom git binutils-arm-none-eabi gcc-arm-none-eabi
 ```
 
