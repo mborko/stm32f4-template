@@ -64,7 +64,7 @@ static void EXTILine0_Config(void);
 int main(void)
 {
  /* This sample code shows how to use STM32F4xx GPIO HAL API to toggle PD12, PD13,
-    PD14, and PD14 IOs (connected to LED4, LED3, LED5 and LED6 on STM32F401C-DISCO board (MB1115B)) 
+    PD14, and PD15 IOs (connected to LED4, LED3, LED5 and LED6 on STM32F401C-DISCO board (MB1115B)) 
     in an infinite loop.
     To proceed, 3 steps are required: */
 
@@ -91,6 +91,8 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+    BSP_LED_Toggle(LED4);
+    HAL_Delay(1000);
   }
 }
 
