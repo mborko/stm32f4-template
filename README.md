@@ -20,12 +20,14 @@ cmake autoconf git stlink
 
 The newest Flash-Tool for the STM-Boards can be found at [STLINK](https://github.com/texane/stlink). Clone it and make a debian package, which then can be installed via dpkg:
 
-        git clone https://github.com/texane/stlink  
-        cd stlink  
-        make clean  
-        make package  
-        sudo dpkg -i build/Release/stlink-*-amd64.deb  
-        sudo ldconfig # refresh library list for st-link  
+```bash
+git clone https://github.com/texane/stlink  
+cd stlink  
+make clean  
+ make package  
+sudo dpkg -i build/Release/stlink-*-amd64.deb  
+sudo ldconfig # refresh library list for st-link
+```
 
 ## Additional Resources
 
