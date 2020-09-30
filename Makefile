@@ -8,9 +8,9 @@
 TARGET = main
 
 ifeq ($(DEVICE),master)
-  SERIAL := $(shell echo "--serial 303637324646353435323530373737323637303233363135")
+  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632333439")
 else ifeq ($(DEVICE),slave)
-  SERIAL := $(shell echo "--serial 303637324646333233353335343734423433303632333534")
+  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632303133")
 endif
 
 # MCU: part number to build for
@@ -24,7 +24,7 @@ OUTDIR = build
 MAINFILE = $(OUTDIR)/$(TARGET).bin
 
 # STM32_PATH: path to STM32 Firmware folder
-STM32_PATH = $(HOME)/opt/STM32Cube_FW_F4_V1.24.1
+STM32_PATH = $(HOME)/opt/STM32CubeF4
 CMSIS_PATH = $(STM32_PATH)/Drivers/CMSIS
 
 PROJ := src/template

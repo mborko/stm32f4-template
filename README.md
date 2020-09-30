@@ -32,7 +32,8 @@ sudo ldconfig # refresh library list for st-link
 ## Additional Resources
 
 ### STM32CubeF4
-Download the [STM32Cube-F4](http://www.st.com/web/catalog/tools/FM147/CL1794/SC961/SS1743/PF259243#) Library and extract the Files to the ```~/opt``` Folder.
+Clone the [STM32Cube-F4](https://github.com/STMicroelectronics/STM32CubeF4) Library to the ```~/opt``` Folder or any other destination.
+Check the **STM32_PATH** Definition in the Makefile and change it aproperly.
 
 Further Documentation and the Manuals can be found here:  
 * [Getting started with STM32CubeF4 firmware](http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00107720.pdf)  
