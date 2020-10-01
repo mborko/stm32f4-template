@@ -8,10 +8,10 @@ This is a template repository for getting the main peripherals working on a [STM
 + [Vagrant](#Vagrant)
   
   + [Requirements](#Requirements)
-  + [Vagrant box](#Vagrant%20box)
-  + [How To](#How%20To)
+  + [Vagrant box](#Vagrant-box)
+  + [How To](#How-To)
   + [Troubleshooting](#Troubleshooting)
-+ [Additional Resources](#Additional%"0Resources)
++ [Additional Resources](#Additional-Resources)
   
   + [STM32CubeF4](#STM32CubeF4)
   + [Credits](#Credits)
@@ -160,7 +160,7 @@ If you want to use your the non default directory `src/template` use the followi
 make flash PROJ=/path/to/your/project 
 ```
 
-For the example in [Change Code](#Change%20Code):
+For the example in [Change Code](#Change-Code):
 
 ```bash
 make flash PROJ=~/workspace/my-project
