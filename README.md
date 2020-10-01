@@ -160,7 +160,7 @@ If you want to use your the non default directory `src/template` use the followi
 make flash PROJ=/path/to/your/project 
 ```
 
-For the example in [Change Code](#Change Code):
+For the example in [Change Code](#Change%20Code):
 
 ```bash
 make flash PROJ=~/workspace/my-project
