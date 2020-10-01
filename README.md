@@ -1,5 +1,24 @@
 # Template project for the STM32F4Discovery Board
 
+
+
++ [Toolchain](#Toolchain)
++ [Flash-Tool](#Flash-Tool)
++ [Vagrant](#Vagrant)
+  
+  + [Requirements](#Requirements)
+  + [Vagrant box](#Vagrant%20box)
+  + [How To](#How%20To)
+  + [Troubleshooting](#Troubleshooting)
++ [Additional Resources](#Additional%"0Resources)
+  
+  + [STM32CubeF4](#STM32CubeF4)
+  + [Credits](#Credits)
+  
+    
+
+
+
 This is a template repository for getting the main peripherals working on a [STM32F4Discovery](https://www.st.com/en/evaluation-tools/stm32f4discovery.html#sw-tools-scroll) board.
 
 ## Toolchain
@@ -28,6 +47,136 @@ make clean
 sudo dpkg -i build/Release/stlink-*-amd64.deb  
 sudo ldconfig # refresh library list for st-link
 ```
+
+
+
+## Vagrant
+
+### Requirements
+
++ Working Virtualbox ([guide](https://www.virtualbox.org/wiki/Downloads))
+
++ Virtualbox Extension ([guide](https://www.nakivo.com/blog/how-to-install-virtualbox-extension-pack/))
+
++ Working Vagrant Installation ([guide](https://learn.hashicorp.com/tutorials/vagrant/getting-started-install?in=vagrant/getting-started))
+
+  
+
+### Vagrant box
+
+clone the Repo (or only the Vagrantfile) and copy it to where u want to install it
+
+```bash
+git clone https://github.com/mborko/stm32f4-template
+cd stm32f4-template
+cp Vagrantfile /installation/directory/
+cd /installation/directory/
+```
+
+
+
+Create a VM with the Vagrantfile and stop it again
+
+```bash
+vagrant up
+vagrant halt
+```
+
+**Notice:** *vagrant also creates a shared directory in the current directory called `workspace`*
+
+
+
+
+
+Add a USB Controller through Virtualbox (VM needs to be Powered Off) and add the Microcontroller (may need to be repeated for each device)
+
++ openstm > Settings > USB > Enable USB Controller > USB 2.0 > Add USB Filter ![add usb filter](pictures/add_usb_filter.png) > STM32F4
+
+![USB-Controller](pictures/Virtualbox.png)
+
+
+
+Start the VM again (same directory as Vagrantfile)
+
+```bash
+vagrant up
+```
+
+
+
+### How To
+
+Connect to the VM (same directory as Vagrantfile)
+
+```bash
+vagrant ssh
+```
+
+
+
+change into the `stm32f4-template` directory and make the project
+
+```bash
+cd stm32f4-template
+make clean
+make
+```
+
+
+
+#### Change Code
+
+First create a Directory in Workspace
+
+```bash
+mkdir ~/workspace/my-project
+```
+
+Copy the template into your project
+
+```bash
+cp -R src/template/* ~/workspace/my-project
+```
+
+Now you can edit the `main.c` (example uses vim editor)
+
+```bash
+vim ~/workspace/my-project/Src/main.c
+```
+
+**Notice:**  *you can also change the code through your host by accessing the Shared director `workspace`*
+
+
+
+#### Flash to Device
+
+in order to flash the device use the following Command
+
+```bash
+make flash
+```
+
+If you want to use your the non default directory `src/template` use the following command
+
+```bash
+make flash PROJ=/path/to/your/project 
+```
+
+For the example in [Change Code](#Change Code):
+
+```bash
+make flash PROJ=~/workspace/my-project
+```
+
+
+
+### Troubleshooting
+
+### Flash
+
+Incase the flash fails just unplug and plug your device again.
+
+
 
 ## Additional Resources
 
