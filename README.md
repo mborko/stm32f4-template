@@ -1,6 +1,7 @@
 # Template project for the STM32F4Discovery Board
 
 
+This is a template repository for getting the main peripherals working on a [STM32F4Discovery](https://www.st.com/en/evaluation-tools/stm32f4discovery.html#sw-tools-scroll) board.
 
 + [Toolchain](#Toolchain)
 + [Flash-Tool](#Flash-Tool)
@@ -17,9 +18,6 @@
   
     
 
-
-
-This is a template repository for getting the main peripherals working on a [STM32F4Discovery](https://www.st.com/en/evaluation-tools/stm32f4discovery.html#sw-tools-scroll) board.
 
 ## Toolchain
 
