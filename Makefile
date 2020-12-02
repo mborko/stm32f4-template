@@ -45,7 +45,6 @@ INCLUDES += -I$(STM32_PATH)/Projects/STM32F4-Discovery/Demonstrations/Inc
 INCLUDES += -I$(STM32_PATH)/Projects/STM32F4-Discovery/Templates/Inc
 INCLUDES += -I$(CMSIS_PATH)/Device/ST/STM32F4xx/Include
 INCLUDES += -I$(CMSIS_PATH)/Include
-##INCLUDES += -include$(STM32_PATH)/Project/Demonstration/stm32f30x_conf.h
 INCLUDES += -include$(STM32_PATH)/Projects/STM32F4-Discovery/Templates/Inc/stm32f4xx_hal_conf.h
 INCLUDES += -include$(STM32_PATH)/Drivers/BSP/STM32F4-Discovery/stm32f4_discovery.h
 INCLUDES += -include$(CMSIS_PATH)/Device/ST/STM32F4xx/Include/stm32f407xx.h
