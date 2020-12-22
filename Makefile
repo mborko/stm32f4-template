@@ -7,10 +7,14 @@
 # TARGET: name of the output file
 TARGET = main
 
-ifeq ($(DEVICE),master)
-  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632333439")
-else ifeq ($(DEVICE),slave)
+ifeq ($(USER),turing)
   SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632303133")
+else ifeq ($(USER),knuth)
+  SERIAL := $(shell echo "--serial 303636384646333233353335343734423433303632323534")
+else ifeq ($(USER),lovelace)
+  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632383534")
+else ifeq ($(USER),hopper)
+  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632333439")
 endif
 
 # MCU: part number to build for
