@@ -25,6 +25,8 @@ To get all dependencies and be ready to flash the STM32F4 Board, install the fol
 ```bash
 apt install cmake libusb-dev libusb-1.0-0-dev build-essential autoconf \
 cutecom git binutils-arm-none-eabi gcc-arm-none-eabi
+
+apt install rpm pkg-config debhelper # for flash-tool build process
 ```
 
 On `arch` you can prepare your system with those packages:

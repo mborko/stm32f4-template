@@ -7,10 +7,14 @@
 # TARGET: name of the output file
 TARGET = main
 
-ifeq ($(DEVICE),master)
-  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632333439")
-else ifeq ($(DEVICE),slave)
+ifeq ($(USER),turing)
   SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632303133")
+else ifeq ($(USER),knuth)
+  SERIAL := $(shell echo "--serial 303636384646333233353335343734423433303632323534")
+else ifeq ($(USER),lovelace)
+  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632383534")
+else ifeq ($(USER),hopper)
+  SERIAL := $(shell echo "--serial 303637304646333233353335343734423433303632333439")
 endif
 
 # MCU: part number to build for
@@ -45,7 +49,6 @@ INCLUDES += -I$(STM32_PATH)/Projects/STM32F4-Discovery/Demonstrations/Inc
 INCLUDES += -I$(STM32_PATH)/Projects/STM32F4-Discovery/Templates/Inc
 INCLUDES += -I$(CMSIS_PATH)/Device/ST/STM32F4xx/Include
 INCLUDES += -I$(CMSIS_PATH)/Include
-##INCLUDES += -include$(STM32_PATH)/Project/Demonstration/stm32f30x_conf.h
 INCLUDES += -include$(STM32_PATH)/Projects/STM32F4-Discovery/Templates/Inc/stm32f4xx_hal_conf.h
 INCLUDES += -include$(STM32_PATH)/Drivers/BSP/STM32F4-Discovery/stm32f4_discovery.h
 INCLUDES += -include$(CMSIS_PATH)/Device/ST/STM32F4xx/Include/stm32f407xx.h
